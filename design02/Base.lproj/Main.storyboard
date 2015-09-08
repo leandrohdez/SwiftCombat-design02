@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sdc-f6-XKk">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Tickets View Controller-->
+        <scene sceneID="pbF-QA-PhA">
+            <objects>
+                <viewController id="sdc-f6-XKk" customClass="TicketsViewController" customModule="design02" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="28R-cN-CUL"/>
+                        <viewControllerLayoutGuide type="bottom" id="nW1-Di-QOS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Bcd-E9-hSz">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="mSu-EF-rdh">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="mSu-EF-rdh" firstAttribute="leading" secondItem="Bcd-E9-hSz" secondAttribute="leadingMargin" constant="-16" id="9gz-1j-7iY"/>
+                            <constraint firstItem="mSu-EF-rdh" firstAttribute="top" secondItem="Bcd-E9-hSz" secondAttribute="topMargin" id="Cja-aL-IdU"/>
+                            <constraint firstItem="nW1-Di-QOS" firstAttribute="top" secondItem="mSu-EF-rdh" secondAttribute="bottom" id="SFF-6o-6IU"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="mSu-EF-rdh" secondAttribute="trailing" constant="-16" id="jAp-sz-AED"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="mSu-EF-rdh" id="0pI-BM-rms"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7eT-jk-Apr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="658" y="489"/>
+        </scene>
+    </scenes>
+</document>
