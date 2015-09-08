@@ -15,7 +15,6 @@
 		C49E76D71B98A0B600C9EC81 /* TicketsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49E76D61B98A0B600C9EC81 /* TicketsViewController.swift */; };
 		C49E76D91B98A23A00C9EC81 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49E76D81B98A23A00C9EC81 /* GlobalFunctions.swift */; };
 		C49E76DB1B98A2C500C9EC81 /* DeliveryCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49E76DA1B98A2C500C9EC81 /* DeliveryCardCell.swift */; };
-		C4E54AEB1B99EBDB00C2D473 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4E54AEA1B99EBDB00C2D473 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,7 +48,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C4E54AEB1B99EBDB00C2D473 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,7 +9,6 @@
 import UIKit
 
 
-
 class TicketsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet var tableView: UITableView!
@@ -24,7 +23,16 @@ class TicketsViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.backgroundColor = UIColor.clearColor()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
+        // space in top
+        self.tableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 34))
+        
+        // space in bootom
+        self.tableView.tableFooterView = UIView(frame: CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 34))
     }
 
 
@@ -41,12 +49,7 @@ class TicketsViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = DeliveryCardCell()
         
-        var comming = false
-        if indexPath.row == 1 {
-            comming = true
-        }
-        
-        cell.performWithColor(self.colors[indexPath.row], comming: comming)
+        cell.performWithColor(self.colors[indexPath.row], comming: false)
         return cell
     }
     
