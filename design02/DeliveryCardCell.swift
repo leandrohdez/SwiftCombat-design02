@@ -154,60 +154,14 @@ class DeliveryCardCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func performWithColor(color: UIColor, comming: Bool) {
+    func performWithColor(color: UIColor) {
         self.colorBand.backgroundColor = color
-        
-        if comming == true {
-            self.colorBand.frame        = CGRectMake(0, 0, 90, CGRectGetHeight(self.cardFrame.frame))
-            self.priceLabel.textColor   = UIColor.whiteColor().colorWithAlphaComponent(0.9)
-            self.dayLabel.textColor     = UIColor.whiteColor().colorWithAlphaComponent(0.5)
-            self.hourLabel.textColor    = UIColor.whiteColor().colorWithAlphaComponent(0.6)
             
-            UIView.animateWithDuration(0.5, animations: { () -> Void in
-                
-                self.cardFrame.frame = CGRectMake(10, 20, CGRectGetWidth(self.frame)-20, 148)
-                
-            }, completion: { (finish) -> Void in
-                if finish == true {
-                    
-                    // Flip 1
-                    self.flipView1 = UIView(frame: CGRectMake(10, CGRectGetMaxY(self.cardFrame.frame)-60, CGRectGetWidth(self.cardFrame.frame), 60))
-                    self.flipView1.backgroundColor = UIColor.whiteColor()
-                    self.addSubview(self.flipView1)
-                    
-                    var layerTranform: CALayer = self.flipView1.layer
-                    
-                    var rotationAndPerspectiveTransform: CATransform3D = CATransform3DIdentity
-                    rotationAndPerspectiveTransform.m34 = 1.0 / -500
-                    rotationAndPerspectiveTransform = CATransform3DRotate(rotationAndPerspectiveTransform, CGFloat(180 * M_PI / 180.0), CGFloat(1.0), CGFloat(0.0), CGFloat(0.0))
-                    layerTranform.transform = rotationAndPerspectiveTransform
-                    
-                    var translationTransform: CATransform3D = CATransform3DIdentity
-                    
-                        
-                        self.flipView1.center = CGPointMake(CGRectGetMidX(self.flipView1.frame) + CGRectGetHeight(self.flipView1.frame)/2, CGRectGetMidY(self.flipView1.frame))
-                    
-                   
-    
-                        rotationAndPerspectiveTransform = CATransform3DRotate(rotationAndPerspectiveTransform, CGFloat(90 * M_PI / 180.0), CGFloat(1.0), CGFloat(0.0), CGFloat(0.0))
-                        self.flipView1.layer.transform = rotationAndPerspectiveTransform
-                        
-                        var labeltest = UILabel(frame: CGRectMake(0, 0, 280, 60))
-                        labeltest.text = "Lorem impsum over due"
-                        self.flipView1.addSubview(labeltest)
-                        
-                 
-                    
-                }
-            })
-        }
-        else{
-            self.colorBand.frame        = CGRectMake(0, 0, 8, CGRectGetHeight(self.cardFrame.frame))
-            self.priceLabel.textColor   = UIColor.darkGrayColor().colorWithAlphaComponent(0.9)
-            self.dayLabel.textColor     = UIColor.darkGrayColor().colorWithAlphaComponent(0.5)
-            self.hourLabel.textColor    = UIColor.darkGrayColor().colorWithAlphaComponent(0.6)
-        }
-        
+        self.colorBand.frame        = CGRectMake(0, 0, 8, CGRectGetHeight(self.cardFrame.frame))
+        self.priceLabel.textColor   = UIColor.darkGrayColor().colorWithAlphaComponent(0.9)
+        self.dayLabel.textColor     = UIColor.darkGrayColor().colorWithAlphaComponent(0.5)
+        self.hourLabel.textColor    = UIColor.darkGrayColor().colorWithAlphaComponent(0.6)
+  
         self.drawDots(color)
     }
     
@@ -249,11 +203,31 @@ class DeliveryCardCell: UITableViewCell {
         circleLayer2.strokeColor = color.CGColor
         self.dotedView.layer.addSublayer(circleLayer2)
     }
-    
   
     // MARK: - Touch Event Action
     func touchAction(recognizer: UITapGestureRecognizer) {
         self.didTouch?()
+    }
+    
+    // MARK: desplegar
+    func deployViews() {
+        
+          /*  self.cardFrame.layer.anchorPoint = CGPoint(x:0.5, y:1)
+            
+            var transform: CATransform3D = CATransform3DIdentity
+            transform.m34 = -1.0/500
+            self.cardFrame.layer.transform = transform
+            
+            UIView.animateWithDuration(0.9, animations: { () -> Void in
+                self.cardFrame.layer.transform = CATransform3DRotate(transform, -1*CGFloat(M_PI/2), 1, 0, 0)
+                
+                }) { (finish) -> Void in
+                    if finish == true {
+                        
+                    }
+            }
+            */
+    
     }
     
     
