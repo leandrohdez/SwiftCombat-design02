@@ -35,6 +35,14 @@ class DeliveryCardCell: UITableViewCell {
     
     var dotedView           = UIView()
     
+    var didTouch: (()->())?
+    
+    var flipView1 = UIView()
+    var flipView2 = UIView()
+    var flipView3 = UIView()
+    
+    
+    // MARK: initialization
     override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
         super.init(style: UITableViewCellStyle.Value1, reuseIdentifier: reuseIdentifier)
         
@@ -47,6 +55,9 @@ class DeliveryCardCell: UITableViewCell {
         
         self.cardFrame.layer.borderColor = UIColorFromRGB(0x3e4c5b).colorWithAlphaComponent(0.6).CGColor
         self.cardFrame.layer.borderWidth = 0.8
+        
+        let touchGesture = UITapGestureRecognizer(target: self, action: Selector("touchAction:"))
+        self.cardFrame.addGestureRecognizer(touchGesture)
         
         self.colorBand = UIView(frame: CGRectMake(0, 0, 8, CGRectGetHeight(self.cardFrame.frame)))
         self.cardFrame.addSubview(self.colorBand)
@@ -133,7 +144,6 @@ class DeliveryCardCell: UITableViewCell {
         
         // dotted line
         self.dotedView = UIView(frame: CGRectMake(bottomButtonsX-4, CGRectGetMinY(self.sourceLabel.frame), 10, CGRectGetMaxY(self.destinationLabel.frame)-CGRectGetMinY(self.sourceLabel.frame)))
-        //self.dotedView.backgroundColor = UIColor.redColor()
         self.cardFrame.addSubview(self.dotedView)
         
         self.addSubview(self.cardFrame)
@@ -148,35 +158,58 @@ class DeliveryCardCell: UITableViewCell {
         self.colorBand.backgroundColor = color
         
         if comming == true {
-            self.colorBand.frame = CGRectMake(0, 0, 90, CGRectGetHeight(self.cardFrame.frame))
-            self.priceLabel.textColor = UIColor.whiteColor().colorWithAlphaComponent(0.9)
-            self.dayLabel.textColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
-            self.hourLabel.textColor = UIColor.whiteColor().colorWithAlphaComponent(0.6)
+            self.colorBand.frame        = CGRectMake(0, 0, 90, CGRectGetHeight(self.cardFrame.frame))
+            self.priceLabel.textColor   = UIColor.whiteColor().colorWithAlphaComponent(0.9)
+            self.dayLabel.textColor     = UIColor.whiteColor().colorWithAlphaComponent(0.5)
+            self.hourLabel.textColor    = UIColor.whiteColor().colorWithAlphaComponent(0.6)
+            
+            UIView.animateWithDuration(0.5, animations: { () -> Void in
+                
+                self.cardFrame.frame = CGRectMake(10, 20, CGRectGetWidth(self.frame)-20, 148)
+                
+            }, completion: { (finish) -> Void in
+                if finish == true {
+                    
+                    // Flip 1
+                    self.flipView1 = UIView(frame: CGRectMake(10, CGRectGetMaxY(self.cardFrame.frame)-60, CGRectGetWidth(self.cardFrame.frame), 60))
+                    self.flipView1.backgroundColor = UIColor.whiteColor()
+                    self.addSubview(self.flipView1)
+                    
+                    var layerTranform: CALayer = self.flipView1.layer
+                    
+                    var rotationAndPerspectiveTransform: CATransform3D = CATransform3DIdentity
+                    rotationAndPerspectiveTransform.m34 = 1.0 / -500
+                    rotationAndPerspectiveTransform = CATransform3DRotate(rotationAndPerspectiveTransform, CGFloat(180 * M_PI / 180.0), CGFloat(1.0), CGFloat(0.0), CGFloat(0.0))
+                    layerTranform.transform = rotationAndPerspectiveTransform
+                    
+                    var translationTransform: CATransform3D = CATransform3DIdentity
+                    
+                        
+                        self.flipView1.center = CGPointMake(CGRectGetMidX(self.flipView1.frame) + CGRectGetHeight(self.flipView1.frame)/2, CGRectGetMidY(self.flipView1.frame))
+                    
+                   
+    
+                        rotationAndPerspectiveTransform = CATransform3DRotate(rotationAndPerspectiveTransform, CGFloat(90 * M_PI / 180.0), CGFloat(1.0), CGFloat(0.0), CGFloat(0.0))
+                        self.flipView1.layer.transform = rotationAndPerspectiveTransform
+                        
+                        var labeltest = UILabel(frame: CGRectMake(0, 0, 280, 60))
+                        labeltest.text = "Lorem impsum over due"
+                        self.flipView1.addSubview(labeltest)
+                        
+                 
+                    
+                }
+            })
         }
         else{
-            self.colorBand.frame = CGRectMake(0, 0, 8, CGRectGetHeight(self.cardFrame.frame))
-            self.priceLabel.textColor = UIColor.darkGrayColor().colorWithAlphaComponent(0.9)
-            self.dayLabel.textColor = UIColor.darkGrayColor().colorWithAlphaComponent(0.5)
-            self.hourLabel.textColor = UIColor.darkGrayColor().colorWithAlphaComponent(0.6)
+            self.colorBand.frame        = CGRectMake(0, 0, 8, CGRectGetHeight(self.cardFrame.frame))
+            self.priceLabel.textColor   = UIColor.darkGrayColor().colorWithAlphaComponent(0.9)
+            self.dayLabel.textColor     = UIColor.darkGrayColor().colorWithAlphaComponent(0.5)
+            self.hourLabel.textColor    = UIColor.darkGrayColor().colorWithAlphaComponent(0.6)
         }
         
         self.drawDots(color)
     }
-    
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
-    
-
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
     
     func drawDots(color: UIColor) {
         let radius: CGFloat = 3.0
@@ -210,11 +243,30 @@ class DeliveryCardCell: UITableViewCell {
         self.dotedView.layer.addSublayer(dot3)
         
         var circleLayer2 = CAShapeLayer()
-        circleLayer2.path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 2.0 * radius, height: 2.0 * radius)  , cornerRadius: radius).CGPath
+        circleLayer2.path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 2.0 * radius, height: 2.0 * radius), cornerRadius: radius).CGPath
         circleLayer2.position = CGPoint(x: (CGRectGetWidth(self.dotedView.frame)/2)-radius, y: 38)
         circleLayer2.fillColor = UIColor.clearColor().CGColor
         circleLayer2.strokeColor = color.CGColor
         self.dotedView.layer.addSublayer(circleLayer2)
     }
+    
   
+    // MARK: - Touch Event Action
+    func touchAction(recognizer: UITapGestureRecognizer) {
+        self.didTouch?()
+    }
+    
+    
+    // MARK: - TableViewCell Delegate
+    override func setSelected(selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        
+        // Configure the view for the selected state
+    }
+    
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
 }
