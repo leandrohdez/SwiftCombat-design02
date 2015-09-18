@@ -53,16 +53,16 @@ class TicketsViewController: UIViewController, UITableViewDelegate, UITableViewD
         let cell = DeliveryCardCell()
         
         if self.selectedIndex == indexPath.row {
-            cell.performWithColor(self.colors[indexPath.row], comming: true)
+            cell.performWithColor(self.colors[indexPath.row])
         }
         else{
-            cell.performWithColor(self.colors[indexPath.row], comming: false)
+            cell.performWithColor(self.colors[indexPath.row])
         }
         
         cell.didTouch = {
             
-            var oldSelectedIndex = (self.selectedIndex >= 0) ? self.selectedIndex : -1
-            var newSelectedIndex = indexPath.row
+            let oldSelectedIndex = (self.selectedIndex >= 0) ? self.selectedIndex : -1
+            let newSelectedIndex = indexPath.row
             
             self.resizeCellSelectedIndex(newSelectedIndex, oldSelectedIndex: oldSelectedIndex)
             

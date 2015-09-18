@@ -101,8 +101,8 @@ class DeliveryCardCell: UITableViewCell {
         self.destinationLabel.textColor = UIColor.blackColor().colorWithAlphaComponent(0.7)
         self.cardFrame.addSubview(self.destinationLabel)
         
-        var bottomButtonsX      = CGRectGetMaxX(self.lineVerticalSeparator.frame)+10
-        var bottomButtonsWidth  = (CGRectGetWidth(self.cardFrame.frame) - (CGRectGetMaxX(self.lineVerticalSeparator.frame)+10) - 10)/3
+        let bottomButtonsX      = CGRectGetMaxX(self.lineVerticalSeparator.frame)+10
+        let bottomButtonsWidth  = (CGRectGetWidth(self.cardFrame.frame) - (CGRectGetMaxX(self.lineVerticalSeparator.frame)+10) - 10)/3
         
         self.requestTitleLabel = UILabel(frame: CGRectMake(bottomButtonsX, 100, bottomButtonsWidth, 14))
         self.requestTitleLabel.font = UIFont.systemFontOfSize(11)
@@ -150,7 +150,7 @@ class DeliveryCardCell: UITableViewCell {
     }
     
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -168,35 +168,35 @@ class DeliveryCardCell: UITableViewCell {
     func drawDots(color: UIColor) {
         let radius: CGFloat = 3.0
         
-        var circleLayer1 = CAShapeLayer()
+        let circleLayer1 = CAShapeLayer()
         circleLayer1.path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 2.0 * radius, height: 2.0 * radius)  , cornerRadius: radius).CGPath
         circleLayer1.position = CGPoint(x: (CGRectGetWidth(self.dotedView.frame)/2)-radius, y: 9)
         circleLayer1.fillColor = UIColor.clearColor().CGColor
         circleLayer1.strokeColor = color.CGColor
         self.dotedView.layer.addSublayer(circleLayer1)
         
-        var dot1 = CAShapeLayer()
+        let dot1 = CAShapeLayer()
         dot1.path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 2.0, height: 2.0)  , cornerRadius: 1).CGPath
         dot1.position = CGPoint(x: (CGRectGetWidth(self.dotedView.frame)/2)-1, y: 19)
         dot1.fillColor = UIColor.clearColor().CGColor
         dot1.strokeColor = color.colorWithAlphaComponent(0.7).CGColor
         self.dotedView.layer.addSublayer(dot1)
         
-        var dot2 = CAShapeLayer()
+        let dot2 = CAShapeLayer()
         dot2.path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 2.0, height: 2.0)  , cornerRadius: 1).CGPath
         dot2.position = CGPoint(x: (CGRectGetWidth(self.dotedView.frame)/2)-1, y: 25)
         dot2.fillColor = UIColor.clearColor().CGColor
         dot2.strokeColor = color.colorWithAlphaComponent(0.7).CGColor
         self.dotedView.layer.addSublayer(dot2)
         
-        var dot3 = CAShapeLayer()
+        let dot3 = CAShapeLayer()
         dot3.path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 2.0, height: 2.0)  , cornerRadius: 1).CGPath
         dot3.position = CGPoint(x: (CGRectGetWidth(self.dotedView.frame)/2)-1, y: 31)
         dot3.fillColor = UIColor.clearColor().CGColor
         dot3.strokeColor = color.colorWithAlphaComponent(0.7).CGColor
         self.dotedView.layer.addSublayer(dot3)
         
-        var circleLayer2 = CAShapeLayer()
+        let circleLayer2 = CAShapeLayer()
         circleLayer2.path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 2.0 * radius, height: 2.0 * radius), cornerRadius: radius).CGPath
         circleLayer2.position = CGPoint(x: (CGRectGetWidth(self.dotedView.frame)/2)-radius, y: 38)
         circleLayer2.fillColor = UIColor.clearColor().CGColor
